@@ -1,63 +1,266 @@
-<html>
-   <head>
-                    <title> California Youth Leadership Conference </title>
-   </head>
-         <body>
-           
-             <img src="https://socalsistercities.org/wp-content/uploads/2020/11/CYLSwebsiteScreen2-1536x831.jpg" alt="Conferencelogo"style width="700px" height="400px">
+import React, { useState } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-              <h1>Youth Leadership Conference</h1>          
+const OrganelleCard = ({ organelle }) => {
+  const categoryIcons = {
+    Control: '🧠',
+    Energy: '⚡',
+    Transport: '📦',
+    Structure: '🧱'
+  };
 
-           <p>
-              This online event is for youth by youth with students attending from throughout California, as well as from over 100 countries throughout the world. All of the panel topics and questions were selected by youth and young professionals. Attendees of all ages are welcome. 
-          </p>
+  const statColors = {
+    10: 'bg-purple-600',
+    9: 'bg-purple-500',
+    8: 'bg-blue-600',
+    7: 'bg-blue-500',
+    6: 'bg-green-600',
+    5: 'bg-green-500',
+    4: 'bg-yellow-600',
+    3: 'bg-orange-500',
+    2: 'bg-orange-600',
+    1: 'bg-red-500'
+  };
 
-       <h2>February 25 2023  SATURDAY</h2>
+  return (
+    <div className="w-80 h-[32rem] bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-2xl border-4 border-yellow-500 p-4 flex flex-col">
+      {/* Header */}
+      <div className="flex justify-between items-start mb-3">
+        <h2 className="text-2xl font-bold text-yellow-400">{organelle.name}</h2>
+        <div className="w-12 h-12 bg-slate-700 rounded-full flex items-center justify-center text-2xl border-2 border-yellow-500">
+          {categoryIcons[organelle.category]}
+        </div>
+      </div>
 
-          <ul>
-                  <li> 5:00 - 5:05 PM PST   Opening Presentation </li>
+      {/* Image placeholder */}
+      <div className="bg-slate-700 rounded-lg h-32 flex items-center justify-center mb-3 border-2 border-slate-600">
+        <span className="text-6xl">{organelle.emoji}</span>
+      </div>
 
-                  <li> 5:05 - 5:35 PM PST
-                      Racial & Gender Equity Panel
-                      California high school & college student 6-member panel.Brought to you by Koyamada International Foundation and the East Bay Times.</li>
-             
-                  <li>5:35 - 5:40 PM PST
-                      Musical Performance: Musical Artist Ava</li>
+      {/* Cell Type */}
+      <div className="bg-slate-700 rounded px-3 py-1 mb-3 border border-slate-600">
+        <p className="text-sm text-slate-300">
+          <span className="font-semibold text-yellow-400">Cell Type:</span> {organelle.cellType}
+        </p>
+      </div>
 
-                  <li>5:40- 5:50 PM PST
-                      Adapting to a New Normal Panel
-                      California high school & college student 6-member panel.
-                      Brought to you by Southern California Gas Company and the Orange County Register.</li>
-             
-                  <li> 5:50 - 5:55 PM PST
-                       Musical Performance: Musical Artist Ava August / Norm Mineta & Thelma Press Awards</li>
+      {/* Function */}
+      <div className="bg-slate-700 rounded p-2 mb-3 flex-grow border border-slate-600">
+        <p className="text-xs text-slate-300">
+          <span className="font-semibold text-yellow-400">Function:</span> {organelle.function}
+        </p>
+      </div>
 
-                  <li> 5:55 - 6:15 PM PST
-                       World Peace & Cooperation Panel
-                       California high school & college student 6-member panel.
-                       Brought to you by Japan Airlines and The Press Enterprise.</li>
-             
-                  <li> 6:15 - 6:20 PM PST
-                       Japan - U.S. Panel Opening Presentation
-                       Consul General of Japan in Los Angeles Kenko Sone & Sustainability Keynote Speaker Sripradha Manikantan</li>
-             
-                  <li> 6:20 - 6:40 PM PST
-                       Climate Change & Sustainability Panel
-                       California & Japan high school & college student 6-member (3 U.S. + 3 Japan) panel, co-organized by the U.N.-endorsed Local Conference on Youth Japan and the California Youth Leadership Summit. Brought to you by JUSSCA and the Mercury News.</li>
-             
-                  <li> 6:40 - 7:00 PM PST
-                       International Forum
-                       8-member forum of high school and college students from countries where California's 356 sister cities around the world are located. Brought to you by Anaheim University and the Los Angeles Daily News.</li>
-              </ul>
+      {/* Works With */}
+      <div className="bg-slate-700 rounded p-2 mb-3 border border-slate-600">
+        <p className="text-xs text-slate-300">
+          <span className="font-semibold text-yellow-400">Works With:</span> {organelle.worksWith}
+        </p>
+      </div>
 
-                   <h2> Topics: </h2>
-          <p><b> World Peace & Cooperation</b></p>
-          <p><b>   Coping with the Pandemic</b></p>
-          <p><b>California Youth Leadership Summit</b></p>
-          <p><b> Guest Moderators</b></p>
+      {/* Stats */}
+      <div className="grid grid-cols-4 gap-2">
+        <div className="text-center">
+          <div className={`${statColors[organelle.stats.energy]} text-white font-bold text-lg rounded py-1 border-2 border-slate-600`}>
+            {organelle.stats.energy}
+          </div>
+          <p className="text-xs text-slate-400 mt-1">Energy Use</p>
+        </div>
+        <div className="text-center">
+          <div className={`${statColors[organelle.stats.importance]} text-white font-bold text-lg rounded py-1 border-2 border-slate-600`}>
+            {organelle.stats.importance}
+          </div>
+          <p className="text-xs text-slate-400 mt-1">Importance</p>
+        </div>
+        <div className="text-center">
+          <div className={`${statColors[organelle.stats.versatility]} text-white font-bold text-lg rounded py-1 border-2 border-slate-600`}>
+            {organelle.stats.versatility}
+          </div>
+          <p className="text-xs text-slate-400 mt-1">Versatility</p>
+        </div>
+        <div className="text-center">
+          <div className={`${statColors[organelle.stats.defense]} text-white font-bold text-lg rounded py-1 border-2 border-slate-600`}>
+            {organelle.stats.defense}
+          </div>
+          <p className="text-xs text-slate-400 mt-1">Defense</p>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-<h2> <i> To Register Click The Link Below </i></h2>  <a href="https://youth.socalsistercities.org/summit/">www. California Youth Leadership Conference 2023.Com </a>
+const CellWarsCards = () => {
+  const [currentCard, setCurrentCard] = useState(0);
 
- <p>This Web Page Is Created by ADAN LODHI</p>
-           </body> 
-  </html
+  const organelles = [
+    {
+      name: "Nucleus",
+      category: "Control",
+      emoji: "🔬",
+      cellType: "Both",
+      function: "Controls all cell activities by storing DNA and directing protein synthesis. Command center for gene expression and cell reproduction.",
+      worksWith: "Ribosome, Rough ER, Nuclear Membrane",
+      stats: { energy: 7, importance: 10, versatility: 9, defense: 7 }
+    },
+    {
+      name: "Mitochondria",
+      category: "Energy",
+      emoji: "⚡",
+      cellType: "Both",
+      function: "Powerhouse of the cell. Produces ATP through cellular respiration, providing energy for all cellular processes.",
+      worksWith: "Cytoskeleton, Smooth ER, Ribosomes",
+      stats: { energy: 10, importance: 10, versatility: 8, defense: 6 }
+    },
+    {
+      name: "Ribosome",
+      category: "Transport",
+      emoji: "⚙️",
+      cellType: "Both",
+      function: "Protein synthesis factory. Reads mRNA and assembles amino acids into proteins essential for cell structure and function.",
+      worksWith: "Nucleus, Rough ER, Golgi Apparatus",
+      stats: { energy: 8, importance: 10, versatility: 7, defense: 5 }
+    },
+    {
+      name: "Rough ER",
+      category: "Transport",
+      emoji: "📡",
+      cellType: "Both",
+      function: "Protein processing and quality control. Folds and modifies proteins, prepares them for transport throughout the cell.",
+      worksWith: "Ribosome, Golgi Apparatus, Nucleus",
+      stats: { energy: 7, importance: 9, versatility: 8, defense: 6 }
+    },
+    {
+      name: "Smooth ER",
+      category: "Transport",
+      emoji: "🌊",
+      cellType: "Both",
+      function: "Lipid synthesis and detoxification. Produces lipids, metabolizes carbohydrates, and detoxifies harmful substances.",
+      worksWith: "Rough ER, Mitochondria, Cell Membrane",
+      stats: { energy: 6, importance: 8, versatility: 9, defense: 8 }
+    },
+    {
+      name: "Golgi Apparatus",
+      category: "Transport",
+      emoji: "📮",
+      cellType: "Both",
+      function: "Modification, packaging, and shipping center. Processes proteins and lipids, packages them into vesicles for delivery.",
+      worksWith: "Rough ER, Lysosome, Cell Membrane",
+      stats: { energy: 6, importance: 9, versatility: 9, defense: 5 }
+    },
+    {
+      name: "Lysosome",
+      category: "Transport",
+      emoji: "🗑️",
+      cellType: "Animal",
+      function: "Cellular waste disposal and recycling. Contains digestive enzymes that break down damaged organelles, pathogens, and waste.",
+      worksWith: "Golgi Apparatus, Cell Membrane, Mitochondria",
+      stats: { energy: 7, importance: 8, versatility: 7, defense: 10 }
+    },
+    {
+      name: "Chloroplast",
+      category: "Energy",
+      emoji: "🌿",
+      cellType: "Plant",
+      function: "Photosynthesis powerhouse. Converts light energy into chemical energy (glucose), produces oxygen as byproduct.",
+      worksWith: "Mitochondria, Vacuole, Cell Wall",
+      stats: { energy: 9, importance: 10, versatility: 6, defense: 5 }
+    },
+    {
+      name: "Vacuole",
+      category: "Structure",
+      emoji: "💧",
+      cellType: "Both (larger in plants)",
+      function: "Storage and pressure regulation. Stores water, nutrients, and waste. Maintains turgor pressure in plant cells.",
+      worksWith: "Cell Membrane, Lysosome, Chloroplast",
+      stats: { energy: 4, importance: 8, versatility: 8, defense: 7 }
+    },
+    {
+      name: "Cell Membrane",
+      category: "Structure",
+      emoji: "🛡️",
+      cellType: "Both",
+      function: "Selective barrier and communication hub. Controls what enters/exits cell, receives signals, maintains cell integrity.",
+      worksWith: "Cytoskeleton, Golgi Apparatus, Smooth ER",
+      stats: { energy: 5, importance: 10, versatility: 9, defense: 9 }
+    },
+    {
+      name: "Cell Wall",
+      category: "Structure",
+      emoji: "🧱",
+      cellType: "Plant",
+      function: "Rigid protective armor. Provides structural support, protection from mechanical stress and pathogens, maintains cell shape.",
+      worksWith: "Cell Membrane, Vacuole, Cytoskeleton",
+      stats: { energy: 3, importance: 9, versatility: 5, defense: 10 }
+    },
+    {
+      name: "Cytoskeleton",
+      category: "Structure",
+      emoji: "🕸️",
+      cellType: "Both",
+      function: "Internal framework and transport network. Maintains cell shape, enables movement, transports materials, supports cell division.",
+      worksWith: "Mitochondria, Cell Membrane, All organelles",
+      stats: { energy: 6, importance: 9, versatility: 10, defense: 7 }
+    }
+  ];
+
+  const nextCard = () => {
+    setCurrentCard((prev) => (prev + 1) % organelles.length);
+  };
+
+  const prevCard = () => {
+    setCurrentCard((prev) => (prev - 1 + organelles.length) % organelles.length);
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-8 flex flex-col items-center justify-center">
+      <h1 className="text-5xl font-bold text-yellow-400 mb-2 text-center">Cell Wars</h1>
+      <p className="text-xl text-purple-300 mb-8 text-center">Battle of the Organelles</p>
+      
+      <div className="flex items-center gap-6">
+        <button
+          onClick={prevCard}
+          className="bg-slate-700 hover:bg-slate-600 text-white p-3 rounded-full transition-colors"
+        >
+          <ChevronLeft size={32} />
+        </button>
+
+        <OrganelleCard organelle={organelles[currentCard]} />
+
+        <button
+          onClick={nextCard}
+          className="bg-slate-700 hover:bg-slate-600 text-white p-3 rounded-full transition-colors"
+        >
+          <ChevronRight size={32} />
+        </button>
+      </div>
+
+      <div className="mt-6 flex gap-2">
+        {organelles.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentCard(index)}
+            className={`w-3 h-3 rounded-full transition-colors ${
+              index === currentCard ? 'bg-yellow-400' : 'bg-slate-600'
+            }`}
+          />
+        ))}
+      </div>
+
+      <p className="text-slate-400 mt-6 text-center">
+        Card {currentCard + 1} of {organelles.length}
+      </p>
+
+      <div className="mt-8 bg-slate-800 rounded-lg p-4 max-w-2xl border-2 border-slate-700">
+        <h3 className="text-yellow-400 font-bold mb-2">Stat Justifications:</h3>
+        <ul className="text-slate-300 text-sm space-y-1">
+          <li>• <span className="text-yellow-400">Energy Use:</span> Based on ATP consumption and metabolic activity</li>
+          <li>• <span className="text-yellow-400">Importance:</span> Essential nature for cell survival and function</li>
+          <li>• <span className="text-yellow-400">Versatility:</span> Number of different processes the organelle supports</li>
+          <li>• <span className="text-yellow-400">Defense:</span> Role in protecting against threats and cell repair</li>
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+export default CellWarsCards;
